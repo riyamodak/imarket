@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct MyItemsView: View {
-    
     @ObservedObject var viewModel = ProductViewModel()
-    
 
     var body: some View {
         NavigationView {
@@ -18,37 +16,32 @@ struct MyItemsView: View {
                 HStack {
                     AsyncImage(url: URL(string: product.thumbnail)) { image in image
                             .resizable()
-                            .aspectRatio(contentMode: .fill) // Adjusts image to fit within the frame
-                            .frame(width: 128, height: 128) // Ensures the image is properly sized
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 128, height: 128)
                             .background(Color(.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                             .clipped()
                     } placeholder: {
-                        // Placeholder while the image is loading
                         ProgressView()
                             .frame(width: 128, height: 128)
                     }
                     VStack(alignment: .leading, spacing: 4) {
                         Text(product.title)
-                        //                                .font(.headline)
-                            .foregroundColor(.primary) // Adapts to light/dark mode
+                            .foregroundColor(.primary)
                             .font(.system(size: 17, weight: .regular, design: .default))
                             .lineLimit(1)
                             .truncationMode(.tail)
                         
                         Text("$\(product.price, specifier: "%.2f")")
-                        //                                .font(.subheadline)
-                            .foregroundColor(.primary) // Adapts to light/dark mode
+                            .foregroundColor(.primary)
                             .font(.system(size: 20, weight: .bold))
                         Text(product.category.capitalized)
                             .font(.system(size: 13, weight: .regular, design: .default))
                             .foregroundColor(.white)
                             .padding(.vertical, 2)
                             .padding(.horizontal, 4)
-                            .background(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color(red: 58/255, green: 58/255, blue: 60/255))
-                            )
+                            .background(RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color(red: 58/255, green: 58/255, blue: 60/255)))
                         
                         Spacer().frame(height: 4)
                         
@@ -86,17 +79,15 @@ struct MyItemsView: View {
             .background(Color(.systemBackground))
             .listRowBackground(Color(.systemBackground))
             .navigationTitle("My Items")
-            
             .navigationBarTitleDisplayMode(.large)
-            
-            
         }
         .listStyle(PlainListStyle())
         .edgesIgnoringSafeArea(.top)
     }
-    
 }
+
 
 #Preview {
     MyItemsView(viewModel: ProductViewModel())
+        .preferredColorScheme(.dark)
 }

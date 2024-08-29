@@ -26,7 +26,7 @@ class ProductViewModel: ObservableObject {
         }
         
         var salesTax: Double {
-            subtotal * 0.0725 // Example tax rate for CA (7.25%)
+            subtotal * 0.0725
         }
 
         var totalCost: Double {
@@ -66,7 +66,7 @@ class ProductViewModel: ObservableObject {
                 let decodedResponse = try JSONDecoder().decode(ProductResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.products = decodedResponse.products
-                    self.filterProducts() // Filter products immediately after fetching
+                    self.filterProducts()
                 }
             } catch {
                 print("Failed to decode JSON: \(error)")
@@ -100,10 +100,6 @@ class ProductViewModel: ObservableObject {
         }
     }
     
-    func fetchCartItems() {
-        
-    }
-    
     func addToMyItems(product2: Product) {
         print("Adding to my items: \(product2.title)")
         myItems.append(product2)
@@ -114,12 +110,4 @@ class ProductViewModel: ObservableObject {
             myItems.remove(at: index)
         }
     }
-    
-    func fetchMyItems() {
-        
-    }
-    
-
 }
-
-

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartsView: View {
-    @ObservedObject var viewModel: ProductViewModel // Inject the ViewModel
+    @ObservedObject var viewModel: ProductViewModel 
     @State private var selectedOption: String = "Pick up"
     @State private var isOrderSummaryExpanded: Bool = false
     
@@ -28,16 +28,17 @@ struct CartsView: View {
                        }) {
                            Text("Delivery")
                        }
-                   } label: {
-                       Text(selectedOption)
-                           .font(.system(size: 16, weight: .bold))
-                           .foregroundColor(.primary)
-                       Image(systemName: "chevron.down")
-                           .font(.system(size: 16, weight: .bold))
-                           .padding(.leading, -4)
-                           .foregroundColor(.primary)
-                   }
-                   .menuStyle(BorderlessButtonMenuStyle())
+                    } label: {
+                        Text(selectedOption)
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.primary)
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 16, weight: .bold))
+                            .padding(.leading, -4)
+                            .foregroundColor(.primary)
+                    }
+                    .menuStyle(BorderlessButtonMenuStyle())
+                    
                     Text("from")
                         .font(.system(size: 17))
                         .foregroundColor(Color(UIColor.systemGray2))
@@ -46,20 +47,21 @@ struct CartsView: View {
                         .font(.system(size: 16, weight: .bold))
                         .underline()
                         .padding(.leading, -2)
+                
                     Spacer()
                 }
                 .padding(.leading)
+                
                 List(viewModel.cartItems) { product in
                     HStack {
                         AsyncImage(url: URL(string: product.thumbnail)) { image in image
                                 .resizable()
-                                .aspectRatio(contentMode: .fill) // Adjusts image to fit within the frame
-                                .frame(width: 40, height: 40) // Ensures the image is properly sized
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
                                 .background(Color(.systemBackground))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .clipped()
                         } placeholder: {
-                            // Placeholder while the image is loading
                             ProgressView()
                                 .frame(width: 40, height: 40)
                         }
@@ -69,7 +71,6 @@ struct CartsView: View {
                             .frame(width: 175, height: 22, alignment: .leading)
                             .lineLimit(1)
                             
-                        
                         Spacer()
                         
                         Text("$\(product.price, specifier: "%.2f")")
@@ -90,7 +91,6 @@ struct CartsView: View {
                 }
                 .listStyle(PlainListStyle())
                 .frame(maxHeight: .infinity)
-                
                 
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
@@ -113,7 +113,6 @@ struct CartsView: View {
                         .foregroundColor(.secondary)
                         .padding(.top, -8)
                         
-                        // Expanded Order Summary
                         if isOrderSummaryExpanded {
                             Divider()
                             HStack {
@@ -147,7 +146,7 @@ struct CartsView: View {
                 
                 
                 Button(action: {
-                    // Checkout action
+                    // Implement check out action here
                 }) {
                     Text("Check out")
                         .font(.system(size: 17))
@@ -166,7 +165,8 @@ struct CartsView: View {
        }
 }
 
+
 #Preview {
     CartsView(viewModel: ProductViewModel())
-        .preferredColorScheme(.light)
+        .preferredColorScheme(.dark)
 }

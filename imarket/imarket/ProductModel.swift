@@ -16,6 +16,7 @@ struct Product: Identifiable, Codable, Equatable {
     let tags: [String]
 }
 
+
 struct ProductResponse: Codable {
     let products: [Product]
 }

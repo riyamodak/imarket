@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = ProductViewModel() // Create a single instance of the view model
+    @StateObject var viewModel = ProductViewModel() // Single instance of the view model
     
     init() {
         let tabBarAppearance = UITabBarAppearance()
